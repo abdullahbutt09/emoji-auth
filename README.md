@@ -1,23 +1,23 @@
-# 🔐 Emoji-Based Password Authentication System (MERN Stack)
+# 🔐 Emoji-Based Password Authentication System (MERN + Appwrite)
 
 ## 📌 Project Overview
 
-The **Emoji-Based Password Authentication System** is a web application developed using the **MERN stack** that introduces an alternative authentication mechanism using emojis instead of traditional text-based passwords.
+The **Emoji-Based Password Authentication System** is a web application built using a modern **MERN-based frontend** with **Appwrite as the Backend-as-a-Service (BaaS)**.
+The application introduces an alternative authentication mechanism where users create and log in using **emoji-based passwords** instead of traditional text-based passwords.
 
-The system focuses on improving **usability, memorability, and user satisfaction** by allowing users to create and authenticate using **emoji sequences**, with special emphasis on **culturally familiar emojis**.
-
-This project is inspired by Human–Computer Interaction (HCI) research and aims to demonstrate how culturally relevant visual elements can enhance the overall user authentication experience.
+The system focuses on improving **usability, memorability, and user satisfaction** by leveraging **visual recognition** and **culturally familiar emojis**.
+This project is inspired by **Human–Computer Interaction (HCI)** research and demonstrates how culturally relevant visual elements can enhance authentication experiences.
 
 ---
 
 ## 🎯 Objectives
 
-* Replace traditional text-based passwords with **emoji-based passwords**
+* Replace traditional text-based passwords with **emoji-based authentication**
 * Improve **login success rate** and **task completion time**
 * Reduce **authentication errors**
 * Enhance **user satisfaction and usability**
-* Provide a **secure and user-friendly authentication system**
-* Implement a **research-backed usability-focused design**
+* Utilize **Appwrite** for secure and scalable backend services
+* Implement a **research-backed, usability-focused design**
 
 ---
 
@@ -27,44 +27,45 @@ This project is inspired by Human–Computer Interaction (HCI) research and aims
 * 😀 Emoji selection grid for password creation
 * 🔁 Emoji sequence-based authentication
 * 🌍 Support for culturally familiar emoji sets
-* 📊 Usability metrics tracking (login time, errors)
-* 🔐 Secure password handling on the backend
-* 📱 Responsive UI design
+* 📊 Usability metrics tracking (login time, errors – optional extension)
+* 🔐 Secure authentication using Appwrite services
+* 📱 Fully responsive UI
 
 ---
 
-## 🛠️ Tech Stack (MERN)
+## 🛠️ Tech Stack
 
-### Frontend
+### Frontend (MERN – Frontend Only)
 
 * **React.js** – User interface development
 * **HTML5** – Structure
 * **CSS3** – Styling and layout
 * **JavaScript (ES6+)** – Client-side logic
 
-### Backend
+### Backend (Appwrite – BaaS)
 
-* **Node.js** – Server-side runtime
-* **Express.js** – Backend framework
-* **REST API** – Communication between frontend and backend
+* **Appwrite Authentication** – User management & login
+* **Appwrite Database** – Emoji password storage
+* **Appwrite Functions** – Server-side logic (if required)
+* **Appwrite Security Rules** – Data access control
 
 ### Database
 
-* **MongoDB** – NoSQL database
-* **Mongoose** – Object Data Modeling (ODM)
+* **Appwrite Database** (NoSQL-style collections & documents)
 
 ### Authentication & Security
 
-* Emoji sequence hashing
+* Emoji sequence hashing / transformation
+* Secure session-based authentication
 * Environment variables using `.env`
 * Input validation and error handling
 
 ### Development Tools
 
 * **VS Code**
-* **Postman**
+* **Appwrite Console**
 * **Git & GitHub**
-* **MongoDB Compass**
+* **Postman (optional for testing APIs)**
 
 ---
 
@@ -73,9 +74,10 @@ This project is inspired by Human–Computer Interaction (HCI) research and aims
 ```
 Client (React)
    ↓
-REST API (Express + Node.js)
+Appwrite SDK
    ↓
-Database (MongoDB)
+Appwrite Services
+(Authentication + Database)
 ```
 
 ---
@@ -91,25 +93,19 @@ cd emoji-auth
 
 ---
 
-### 2️⃣ Backend Setup
+### 2️⃣ Appwrite Setup
 
-```bash
-cd server
-npm install
-```
+1. Install and run **Appwrite** (cloud or self-hosted)
+2. Create a new **Project** in Appwrite
+3. Enable:
 
-Create a `.env` file in the backend folder:
+   * Authentication
+   * Database
+4. Create:
 
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-```
-
-Run the backend server:
-
-```bash
-npm run dev
-```
+   * A **Database**
+   * A **Collection** for emoji passwords
+5. Configure permissions for authenticated users
 
 ---
 
@@ -118,6 +114,18 @@ npm run dev
 ```bash
 cd client
 npm install
+```
+
+Create a `.env` file in the client folder:
+
+```env
+VITE_APPWRITE_URL=your_appwrite_endpoint
+VITE_APPWRITE_PROJECT_ID=your_project_id
+```
+
+Run the frontend:
+
+```bash
 npm run dev
 ```
 
@@ -131,20 +139,22 @@ http://localhost:3000
 
 ## 🧪 How It Works
 
-1. **User Registration**
+### 1️⃣ User Registration
 
-   * User selects a sequence of emojis as a password
-   * Emoji sequence is securely stored in the database
+* User selects a sequence of emojis as a password
+* Emoji sequence is processed and stored securely in Appwrite Database
+* Appwrite Authentication manages the user account
 
-2. **User Login**
+### 2️⃣ User Login
 
-   * User re-enters the same emoji sequence
-   * System validates the emoji order and sequence
+* User re-enters the same emoji sequence
+* The system validates the emoji order and sequence
+* Appwrite verifies the session and grants access
 
-3. **Authentication Result**
+### 3️⃣ Authentication Result
 
-   * Successful login if emojis match
-   * Error message if incorrect sequence is entered
+* ✅ Successful login if emojis match
+* ❌ Error message if incorrect sequence is entered
 
 ---
 
@@ -153,7 +163,7 @@ http://localhost:3000
 This application is designed based on **HCI usability principles**, including:
 
 * Reduced cognitive load
-* Visual recognition over text recall
+* Visual recognition instead of text recall
 * Cultural familiarity for better memorability
 * Faster authentication with fewer errors
 
@@ -162,43 +172,44 @@ The system can be extended to measure:
 * Login success rate
 * Task completion time
 * Error rate
-* User satisfaction (SUS)
+* User satisfaction (System Usability Scale – SUS)
 
 ---
 
 ## 🚀 Future Enhancements
 
 * 🔐 Multi-factor authentication (Emoji + OTP)
-* 🎨 Custom emoji sets per user
-* 📱 Mobile app version (React Native)
+* 🎨 User-customizable emoji sets
+* 📱 Mobile application (React Native)
 * 🧠 AI-based emoji recommendations
 * 🕒 Long-term memorability analysis
-* 🌐 Multi-language & cultural support
+* 🌐 Multi-language & cultural adaptation
+* 📊 Admin dashboard for usability analytics
 
 ---
 
 ## 📚 Academic Relevance
 
-This project supports research in:
+This project contributes to research in:
 
 * Human–Computer Interaction (HCI)
 * Usability Engineering
-* Authentication Systems
+* Secure Authentication Systems
 * Visual & Graphical Passwords
 * Cultural Computing
 
 ---
 
-## 👨‍💻 Developers Team Managing
+## 👨‍💻 Development Team
 
-**Muhammad Ahmad Pasha**
-**Muhammad Abdullah Butt**
-**Muhammad Usman**
-**Muhammad Abu Sufyan**
+* **Muhammad Ahmad Pasha**
+* **Muhammad Abdullah Butt**
+* **Muhammad Usman**
+* **Muhammad Abu Sufyan**
 
 ---
 
 ## 📜 License
 
 This project is developed for **educational and research purposes**.
-You are free to use and modify it with proper attribution.
+You are free to use, modify, and extend it with proper attribution.
