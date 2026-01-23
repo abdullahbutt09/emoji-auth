@@ -16,12 +16,14 @@
     "@reduxjs/toolkit": "^2.11.2",
     "await-to-js": "^3.0.0",
     "axios": "^1.7.7",
+    "lucide-react": "^0.562.0",
     "motion": "^12.28.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.6.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^6.27.0"
+    "react-router-dom": "^6.27.0",
+    "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

@@ -8,7 +8,7 @@ const Navbar = ({ brand, links = [], actions, sticky = false, className = "" }) 
   return (
     <nav
       className={[
-        "w-full border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-900/80",
+        "w-full border-b border-gray-200 bg-white/80 backdrop-blur",
         sticky ? "sticky top-0 z-50" : "",
         className,
       ].join(" ")}

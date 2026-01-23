@@ -1,97 +1,101 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "../components/Shared/Button";
+import { useState, useRef, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
-const Header = ({
-  logo,
-  navItems = [],
-  actions,
-  sticky = false,
-  className = "",
-}) => {
-  const [open, setOpen] = useState(false);
+const Header = ({ logo, navItems = [], actions, sticky = false, className = "" }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const headerBaseClasses = "bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800";
+  const headerStickyClasses = sticky ? "sticky top-0 z-50" : "";
+  const headerClasses = `${headerBaseClasses} ${headerStickyClasses} ${className}`;
 
   return (
-    <header
-      className={[
-        "w-full border-b border-gray-200 bg-white/80 backdrop-blur",
-        "dark:border-gray-800 dark:bg-gray-900/80",
-        sticky ? "sticky top-0 z-50" : "",
-        className,
-      ].join(" ")}
-    >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <div className="flex items-center gap-2 font-semibold text-gray-900 dark:text-gray-100">
-          {logo}
-        </div>
+    <header className={headerClasses}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            {logo}
+          </div>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {navItems.map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.href}
-              whileHover={{ y: -2 }}
-              className="text-sm font-medium text-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300"
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item, index) => (
+              <motion.a
+                key={index}
+                href={item.href}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              >
+                {item.label}
+              </motion.a>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="hidden md:flex items-center">
+            {actions}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 rounded p-2"
+              aria-expanded={isMenuOpen}
+              aria-label="Toggle navigation menu"
             >
-              {item.label}
-            </motion.a>
-          ))}
-        </nav>
-
-        <div className="hidden items-center gap-3 md:flex">{actions}</div>
-
-        <Button
-        onClick={() => setOpen((v) => !v)}
-        aria-label="Toggle menu"
-        aria-expanded={open}
-        variant="ghost"
-        size="md"
-        className="md:hidden p-2"
-        >
-        <span className="block h-5 w-5">
-            <span
-            className={[
-                "block h-0.5 w-full bg-current transition-transform",
-                open ? "translate-y-2 rotate-45" : "",
-            ].join(" ")}
-            />
-            <span
-            className={[
-                "mt-1.5 block h-0.5 w-full bg-current transition-opacity",
-                open ? "opacity-0" : "",
-            ].join(" ")}
-            />
-            <span
-            className={[
-                "mt-1.5 block h-0.5 w-full bg-current transition-transform",
-                open ? "-translate-y-2 -rotate-45" : "",
-            ].join(" ")}
-            />
-        </span>
-        </Button>
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
-        {open && (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden"
+        {isMenuOpen && (
+          <motion.div
+            ref={menuRef}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 overflow-hidden"
           >
-            <div className="space-y-2 border-t border-gray-200 px-4 py-4 dark:border-gray-800">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
+            <div className="px-4 pt-2 pb-3 space-y-1">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={index}
                   href={item.href}
-                  className="block rounded-md px-2 py-2 text-sm font-medium text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
-              {actions && <div className="pt-2">{actions}</div>}
+              {actions && (
+                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
+                  {actions}
+                </div>
+              )}
             </div>
-          </motion.nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>

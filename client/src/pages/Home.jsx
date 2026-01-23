@@ -1,129 +1,177 @@
 import { motion } from "framer-motion";
 import Button from "../components/Shared/Button";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
+import Typewriter from "typewriter-effect";
+
 
 const Home = () => {
+  const navItems = [
+    { label: "Features", href: "#features" },
+    { label: "GitHub", href: "https://github.com/abdullahbutt09" },
+  ];
+
+  const footerNavItems = [
+    { label: "Privacy", href: "#" },
+    { label: "Terms", href: "#" },
+    { label: "Docs", href: "#" },
+  ];
+
   return (
-    <div className="w-full text-gray-900 dark:text-gray-100">
-      {/* Hero Section */}
-      <section className="bg-white dark:bg-gray-900 py-20 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <h1 className="text-4xl font-extrabold sm:text-5xl">
-            Emoji-Based Authentication
-          </h1>
-          <p className="mt-4 text-lg sm:text-xl text-gray-600 dark:text-gray-400">
-            Memorably secure passwords using sequences of emojis. Fun, visual, and hard to guess.
-          </p>
-          <div className="mt-8 flex justify-center gap-4">
-            <Button variant="primary" size="lg">Get Started</Button>
-            <Button variant="secondary" size="lg">View GitHub</Button>
+    <div className="w-full text-gray-900 dark:text-gray-100 min-h-screen flex flex-col bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
+      <Header
+        sticky
+        logo={<span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">Emoji-Auth</span>}
+        navItems={navItems}
+        actions={
+          <div className="flex gap-3 items-center justify-center">
+            <Button variant="secondary" size="sm">Sign in</Button>
+            <Button variant="primary" size="sm">Get started</Button>
           </div>
-        </motion.div>
+        }
+      />
+
+      {/* Hero Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 flex-grow">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <h1 className="text-xl md:text-6xl font-extrabold tracking-tight p-2">
+              <Typewriter
+                options={{
+                  strings: [
+                    "Passwords, Reimagined 🧠 with Emojis 🤓",
+                    "Secure Authentication 🚀, Simplified ☕",
+                    "Goodbye Passwords 👋 Hello Emojis 🔐",
+                  ],
+                  autoStart: true,
+                  loop: true,
+                  delay: 70,
+                  deleteSpeed: 40,
+                }}
+              />
+            </h1>
+
+            <p className="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Replace complex passwords with memorable emoji sequences. Secure, fun, and surprisingly strong.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+              <Button variant="primary" size="lg" className="px-8 py-3">
+                Create Your Emoji Pass
+              </Button>
+              <Button variant="secondary" size="lg" className="px-8 py-3">
+                View on GitHub →
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Hero visual mockup */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="mt-16 relative"
+          >
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 max-w-2xl mx-auto">
+              <div className="flex justify-center space-x-3 text-4xl">
+                <span>🔒</span>
+                <span>🚀</span>
+                <span>🦄</span>
+                <span>🍕</span>
+                <span>✨</span>
+              </div>
+              <p className="mt-6 text-gray-700 dark:text-gray-300 text-center font-medium">
+                Your password:{" "}
+                <span className="font-mono bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-lg">
+                  🔒🚀🦄🍕✨
+                </span>
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-5xl text-center"
-        >
-          <h2 className="text-3xl font-bold mb-12">How It Works</h2>
-          <div className="grid gap-8 sm:grid-cols-3">
-            <div className="flex flex-col items-center">
-              <div className="text-5xl mb-4">🎯</div>
-              <h3 className="font-semibold text-lg mb-2">Choose Emojis</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-center">Select a sequence of emojis that you’ll use as your password.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-5xl mb-4">🔒</div>
-              <h3 className="font-semibold text-lg mb-2">Create Password</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-center">Save your emoji sequence securely and start using it to login.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-5xl mb-4">✅</div>
-              <h3 className="font-semibold text-lg mb-2">Login</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-center">Authenticate easily by entering the same emoji sequence.</p>
-            </div>
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              How It Works
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Simple, secure, and intuitive — no more forgotten passwords.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { icon: "🎯", title: "Pick Emojis", desc: "Choose 4–6 emojis that form a story only you remember." },
+              { icon: "🔐", title: "Secure Storage", desc: "We hash your sequence — never store raw emojis." },
+              { icon: "✅", title: "Login Anywhere", desc: "Enter your emoji sequence to authenticate instantly." },
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="group bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="text-5xl mb-5 group-hover:scale-110 transition-transform">{step.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{step.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400">{step.desc}</p>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Why Emoji-Auth */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-gray-900">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-5xl text-center mb-12"
-        >
-          <h2 className="text-3xl font-bold mb-9">Why Emoji-Auth</h2>
-          <div className="grid gap-8 sm:grid-cols-4 mt-15">
-            <motion.div whileHover={{ y: -4 }} className="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 transition-shadow">
-              <div className="text-4xl mb-2">🛡️</div>
-              <p>No traditional passwords</p>
-            </motion.div>
-            <motion.div whileHover={{ y: -4 }} className="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 transition-shadow">
-              <div className="text-4xl mb-2">🔐</div>
-              <p>Harder to brute-force</p>
-            </motion.div>
-            <motion.div whileHover={{ y: -4 }} className="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 transition-shadow">
-              <div className="text-4xl mb-2">🧠</div>
-              <p>Easy to remember</p>
-            </motion.div>
-            <motion.div whileHover={{ y: -4 }} className="p-6 bg-white dark:bg-gray-900 rounded-lg border-2 transition-shadow shadow-white">
-              <div className="text-4xl mb-2">🎉</div>
-              <p>Fun UX experience</p>
-            </motion.div>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:to-gray-950">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+          >
+            Why Developers Love Emoji-Auth
+          </motion.h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            Security meets delight in every interaction.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { emoji: "🛡️", label: "Phishing-Resistant" },
+              { emoji: "🧠", label: "Memorable" },
+              { emoji: "⚡", label: "Fast Login" },
+              { emoji: "🎉", label: "Delightful UX" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700"
+              >
+                <div className="text-3xl mb-3">{item.emoji}</div>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">{item.label}</p>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* Security & Tech */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <h2 className="text-3xl font-bold mb-6">Security & Technology</h2>
-          <ul className="space-y-4 text-gray-600 dark:text-gray-400">
-            <li>Emoji sequences are hashed for secure storage</li>
-            <li>Appwrite backend handles authentication</li>
-            <li>Built with modern React, Tailwind CSS, and Framer Motion</li>
-          </ul>
-        </motion.div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-gray-700">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <h2 className="text-3xl font-bold mb-6">Ready to get started?</h2>
-          <Button variant="primary" size="lg">Get Started</Button>
-        </motion.div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900 text-center text-gray-700 dark:text-gray-300">
-        <p className="mb-2 font-semibold">Emoji-Auth</p>
-        <a href="https://github.com" className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors">GitHub</a>
-        <p className="mt-2 text-sm">&copy; {new Date().getFullYear()} Emoji-Auth. All rights reserved.</p>
-      </footer>
+      <Footer
+        logo={<span className="text-lg font-bold text-gray-900 dark:text-white">Emoji-Auth</span>}
+        navItems={footerNavItems}
+        copyright={`© ${new Date().getFullYear()} Emoji-Auth. Open source & secure.`}
+      />
     </div>
   );
 };
