@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "./Button";
+import Button from "../components/Shared/Button";
 
 const Navbar = ({ brand, links = [], actions, sticky = false, className = "" }) => {
   const [menuOpen, setMenuOpen] = useState(false);

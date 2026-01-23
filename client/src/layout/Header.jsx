@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "./Shared/Button";
+import Button from "../components/Shared/Button";
 
 const Header = ({
   logo,
