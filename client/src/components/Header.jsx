@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Button from "./Shared/Button";
 
 const Header = ({
   logo,
@@ -39,34 +40,35 @@ const Header = ({
 
         <div className="hidden items-center gap-3 md:flex">{actions}</div>
 
-        <button
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-300 md:hidden"
+        <Button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Toggle menu"
+        aria-expanded={open}
+        variant="ghost"
+        size="md"
+        className="md:hidden p-2"
         >
-          <span className="block h-5 w-5">
+        <span className="block h-5 w-5">
             <span
-              className={[
+            className={[
                 "block h-0.5 w-full bg-current transition-transform",
                 open ? "translate-y-2 rotate-45" : "",
-              ].join(" ")}
+            ].join(" ")}
             />
             <span
-              className={[
+            className={[
                 "mt-1.5 block h-0.5 w-full bg-current transition-opacity",
                 open ? "opacity-0" : "",
-              ].join(" ")}
+            ].join(" ")}
             />
             <span
-              className={[
+            className={[
                 "mt-1.5 block h-0.5 w-full bg-current transition-transform",
                 open ? "-translate-y-2 -rotate-45" : "",
-              ].join(" ")}
+            ].join(" ")}
             />
-          </span>
-        </button>
+        </span>
+        </Button>
       </div>
 
       <AnimatePresence>
