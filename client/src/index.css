@@ -1,7 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import "tailwindcss";
 @plugin "daisyui";
 
-/* Add any global CSS rules in this file */
+@keyframes slide {
+  0% { width: 0%; }
+  50% { width: 100%; }
+  100% { width: 0%; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
